@@ -5,10 +5,32 @@ let notes=document.querySelectorAll(".input-box");
 function updateStorage(){
     localStorage.setItem("notes", notecontainer.innerHTML);
 }
+function bindEvents() {
 
+    document.querySelectorAll(".delete").forEach(btn => {
+        btn.onclick = function () {
+            this.parentElement.remove();
+            updateStorage();
+        };
+    });
+     document.querySelectorAll(".input-box").forEach(box => {
+        box.onkeyup = updateStorage;
+    });
+}
 function showNotes(){
     notecontainer.innerHTML=localStorage.getItem("notes")|| ""
+    bindEvents();
 }
+    document.querySelectorAll(".delete").forEach(btn => {
+        btn.onclick = function () {
+            this.parentElement.remove();
+            updateStorage();
+        };
+    });
+
+    document.querySelectorAll(".input-box").forEach(box => {
+        box.onkeyup = updateStorage;
+    });
 showNotes();
 createbtn.addEventListener("click",()=>{
     let note = document.createElement("div");
@@ -22,12 +44,10 @@ createbtn.addEventListener("click",()=>{
     note.appendChild(inputBox);
     note.appendChild(img);
     notecontainer.appendChild(note);
-    img.addEventListener("click",()=>{
-        note.remove();
+
         updateStorage();
+        bindEvents();
     });
-    inputBox.addEventListener("keyup", updateStorage);
-});
 
 
 
