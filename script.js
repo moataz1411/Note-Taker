@@ -10,16 +10,23 @@ function updateStorage(){
 
 function bindEvents() {
 
-    document.querySelectorAll(".delete").forEach(btn => {
+    document.querySelectorAll(".delete").forEach((btn, index) => {
+
         btn.onclick = function () {
-            this.parentElement.remove();
+
+            document.querySelectorAll(".note")[index].remove();
+
+            document.querySelectorAll(".side-item")[index].remove();
+
             updateStorage();
         };
     });
-     document.querySelectorAll(".input-box").forEach(box => {
+
+    document.querySelectorAll(".input-box").forEach(box => {
         box.onkeyup = updateStorage;
     });
 }
+
 function showNotes(){
 
     notecontainer.innerHTML =
