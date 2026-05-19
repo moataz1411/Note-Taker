@@ -63,3 +63,17 @@
     right:15px;
     cursor:pointer;
 }
+.sidepanel{
+    position:absolute;
+    top: 20px;
+    right: 20px;
+    width:250px;
+    background:white;
+    color:black;
+    padding:20px;
+    border-radius:5px;
+}
+.sidepanel h2{
+    font-size: 20px;
+    padding: 10px 0;
+}

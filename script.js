@@ -1,10 +1,13 @@
 const notecontainer=document.querySelector(".notes-container");
 const createbtn=document.querySelector(".btn");
+const sidepanel=document.querySelector(".sidepanel");
 let notes=document.querySelectorAll(".input-box");
 
 function updateStorage(){
     localStorage.setItem("notes", notecontainer.innerHTML);
+    localStorage.setItem("dates", sidepanel.innerHTML);
 }
+
 function bindEvents() {
 
     document.querySelectorAll(".delete").forEach(btn => {
@@ -18,7 +21,12 @@ function bindEvents() {
     });
 }
 function showNotes(){
-    notecontainer.innerHTML=localStorage.getItem("notes")|| ""
+
+    notecontainer.innerHTML =
+    localStorage.getItem("notes") || "";
+    sidepanel.innerHTML =
+    localStorage.getItem("dates") || "";
+
     bindEvents();
 }
     document.querySelectorAll(".delete").forEach(btn => {
@@ -44,6 +52,18 @@ createbtn.addEventListener("click",()=>{
     note.appendChild(inputBox);
     note.appendChild(img);
     notecontainer.appendChild(note);
+    const sideItem=document.createElement("div");
+    sideItem.className="side-item";
+    const now = new Date();
+    const dateString = now.toLocaleDateString();
+    sideItem.innerHTML = `<h2>${dateString}</h2>`;
+    sidepanel.prepend(sideItem);
+img.onclick = function () {
+    note.remove();
+    sideItem.remove();
+
+    updateStorage();
+};
 
         updateStorage();
         bindEvents();
